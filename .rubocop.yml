@@ -1,0 +1,36 @@
+Metrics/LineLength:
+  Max: 100
+
+Style/EndOfLine:
+  EnforcedStyle: lf
+
+Style/BracesAroundHashParameters:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/MutableConstant:
+  AutoCorrect: false
+
+Style/SafeNavigation:
+  Enabled: false
+
+Metrics/ParameterLists:
+  Exclude:
+    - spec/**/*
+
+Metrics/MethodLength:
+  Max: 15
+
+Metrics/AbcSize:
+  Max: 20
+
+Metrics/PerceivedComplexity:
+  Max: 8
+
+Metrics/CyclomaticComplexity:
+  Max: 7
+
+Performance/RedundantMerge:
+  Enabled: false
