@@ -1,0 +1,17 @@
+dependencies:
+  pre:
+    - gem install bundler
+
+test:
+  post:
+    - bundle exec rubocop -D
+
+deployment:
+  rubygems:
+    tag: /v[0-9]+(\.[0-9]+)*/
+    owner: autopp
+    commands:
+      - git config --local user.name "autopp"
+      - git config --local user.email "autopp@gmail.com"
+      - 'echo ":rubygems_api_key: ${RUBYGEMS_API_KEY}" > ~/.gem/credentials && chmod 0600 ~/.gem/credentials'
+      - bundle exec rake release
