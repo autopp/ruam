@@ -3,5 +3,9 @@ require 'ruam/version'
 # Top level namespace for ruam
 #
 module Ruam
-  # Your code goes here...
+  def self.compile_option_names
+    RubyVM::InstructionSequence.compile_option.keys.map do |opt|
+      "--#{opt.to_s.tr('_', '-')}"
+    end
+  end
 end
