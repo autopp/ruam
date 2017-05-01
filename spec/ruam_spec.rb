@@ -1,12 +1,11 @@
 require 'spec_helper'
 
 describe Ruam do
-  describe '.compile_option_names' do
-    subject { described_class.compile_option_names }
+  describe '.optimization_flags' do
+    subject { described_class.optimization_flags }
     it 'returns strings according to names defined in the VM' do
-      expected = RubyVM::InstructionSequence.compile_option.keys.map do |opt|
-        "--#{opt.to_s.tr('_', '-')}"
-      end.sort
+      options = RubyVM::InstructionSequence.compile_option.keys
+      expected = (options - %i[debug_level]).sort
 
       expect(subject.sort).to eq(expected)
     end

@@ -3,10 +3,8 @@ require 'ruam/version'
 # Top level namespace for ruam
 #
 module Ruam
-  def self.compile_option_names
-    RubyVM::InstructionSequence.compile_option.keys.map do |opt|
-      "--#{opt.to_s.tr('_', '-')}"
-    end
+  def self.optimization_flags
+    RubyVM::InstructionSequence.compile_option.keys - %i[debug_level]
   end
 end
 
