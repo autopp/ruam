@@ -9,3 +9,5 @@ module Ruam
     end
   end
 end
+
+require 'ruam/options'
