@@ -4,6 +4,7 @@ dependencies:
 
 test:
   post:
+    - bundle exec ruam lib/ruam.rb
     - bundle exec rubocop -D
 
 deployment:
