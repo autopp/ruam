@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'tempfile'
 
 describe Ruam do
   describe '.optimization_flags' do
@@ -29,16 +30,16 @@ describe Ruam do
     context 'with unknown option' do
       let(:argv) { %W[#{__FILE__} --unknown-optimization-flag] }
 
-      it 'output error message to stderr and nothing to stdout' do
-        expect { subject }.to output(/.+/).to_stderr & output(/\A\z/).to_stdout
+      it 'raise ParseError and nothing to stdout' do
+        expect { subject }.to raise_error(Ruam::Options::ParseError) & output(/\A\z/).to_stdout
       end
     end
 
     context 'with more than one file' do
       let(:argv) { %w[foo.rb bar.rb] }
 
-      it 'output error message to stderr and nothing to stdout' do
-        expect { subject }.to output(/.+/).to_stderr & output(/\A\z/).to_stdout
+      it 'raise ParseError and nothing to stdout' do
+        expect { subject }.to raise_error(Ruam::Options::ParseError) & output(/\A\z/).to_stdout
       end
     end
   end
