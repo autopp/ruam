@@ -8,11 +8,12 @@ module Ruam
       options = { compile_options: {} }
       parser = create_parser(options[:compile_options])
       begin
-        file = parser.parse(argv).first
+        argv = parser.parse(argv)
+        raise ParseError, 'more than one file is specified' if argv.size > 1
       rescue OptionParser::InvalidOption => e
         raise ParseError, e.message
       end
-      options[:file] = file
+      options[:file] = argv.first
       options
     end
 

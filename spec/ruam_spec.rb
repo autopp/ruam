@@ -33,5 +33,13 @@ describe Ruam do
         expect { subject }.to output(/.+/).to_stderr & output(/\A\z/).to_stdout
       end
     end
+
+    context 'with more than one file' do
+      let(:argv) { %w[foo.rb bar.rb] }
+
+      it 'output error message to stderr and nothing to stdout' do
+        expect { subject }.to output(/.+/).to_stderr & output(/\A\z/).to_stdout
+      end
+    end
   end
 end
