@@ -2,4 +2,9 @@
 
 require 'ruam'
 
-Ruam.run(ARGV)
+begin
+  Ruam.run(ARGV)
+rescue Ruam::Options::ParseError => e
+  $stderr.puts e.message
+  exit 1
+end
