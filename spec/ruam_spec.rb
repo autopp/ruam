@@ -13,13 +13,25 @@ describe Ruam do
   end
 
   describe '.run' do
-    subject { described_class.run(%W[#{__FILE__} --peephole-optimization]) }
+    subject { described_class.run(argv) }
 
-    it 'compile given file and output the byte code' do
-      insns = RubyVM::InstructionSequence.compile_file(__FILE__, peephole_optimization: true)
+    context 'with valid options' do
+      let(:argv) { %W[#{__FILE__} --peephole-optimization] }
 
-      expect(RubyVM::InstructionSequence).to receive(:compile_file).and_call_original
-      expect { subject }.to output(insns.disasm).to_stdout
+      it 'compile given file and output the byte code' do
+        insns = RubyVM::InstructionSequence.compile_file(__FILE__, peephole_optimization: true)
+
+        expect(RubyVM::InstructionSequence).to receive(:compile_file).and_call_original
+        expect { subject }.to output(insns.disasm).to_stdout
+      end
+    end
+
+    context 'with unknown option' do
+      let(:argv) { %W[#{__FILE__} --unknown-optimization-flag] }
+
+      it 'output error message to stderr and nothing to stdout' do
+        expect { subject }.to output(/.+/).to_stderr & output(/\A\z/).to_stdout
+      end
     end
   end
 end

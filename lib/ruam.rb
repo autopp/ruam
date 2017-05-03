@@ -8,7 +8,12 @@ module Ruam
   end
 
   def self.run(argv)
-    options = Options.parse(argv)
+    begin
+      options = Options.parse(argv)
+    rescue Options::ParseError => e
+      $stderr.puts e.message
+      return
+    end
     file = options[:file]
     compile_options = RubyVM::InstructionSequence.compile_option.merge(options[:compile_options])
     insns = RubyVM::InstructionSequence.compile_file(file, compile_options)

@@ -7,7 +7,11 @@ module Ruam
     def self.parse(argv)
       options = { compile_options: {} }
       parser = create_parser(options[:compile_options])
-      file = parser.parse(argv).first
+      begin
+        file = parser.parse(argv).first
+      rescue OptionParser::InvalidOption => e
+        raise ParseError, e.message
+      end
       options[:file] = file
       options
     end
@@ -22,6 +26,9 @@ module Ruam
       parser.on('--debug-level=LEVEL') do |v|
         options[:debug_level] = v.to_i
       end
+    end
+
+    class ParseError < StandardError
     end
   end
 end
