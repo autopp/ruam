@@ -27,6 +27,12 @@ describe Ruam do
       end
     end
 
+    context 'without file name' do
+      let(:argv) { [] }
+
+      it 'compile given stdin and output the byte code'
+    end
+
     context 'with unknown option' do
       let(:argv) { %W[#{__FILE__} --unknown-optimization-flag] }
 
