@@ -12,7 +12,11 @@ module Ruam
     file = options[:file]
     compile_options = RubyVM::InstructionSequence.compile_option.merge(options[:compile_options])
 
-    insns = RubyVM::InstructionSequence.compile_file(file, compile_options)
+    insns = if file
+              RubyVM::InstructionSequence.compile_file(file, compile_options)
+            else
+              RubyVM::InstructionSequence.compile($stdin.read, nil, nil, 1, compile_options)
+            end
     puts insns.disasm
   end
 end
