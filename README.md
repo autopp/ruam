@@ -1,4 +1,6 @@
 # Ruam
+[![Gem Version](https://badge.fury.io/rb/ruam.svg)](https://badge.fury.io/rb/ruam)
+[![Build Status](https://circleci.com/gh/autopp/ruam.svg?style=shield&circle-token=21fbc0adbc3428399a27b0f1334dd52ff22d8fd8)](https://circleci.com/gh/autopp/ruam)
 
 Ruam is a simple command line tool to inspect a byte code of Ruby script.
 
